@@ -24,6 +24,9 @@ public class Member extends Auditable {
     private String email;
 
     @Column(length = 100, nullable = false)
+    private String password;
+
+    @Column(length = 100, nullable = false)
     private String name;
 
     @Column(length = 13, nullable = false, unique = true)
@@ -32,6 +35,9 @@ public class Member extends Auditable {
     @Enumerated(value = EnumType.STRING)
     @Column(length = 20, nullable = false)
     private MemberStatus memberStatus = MemberStatus.MEMBER_ACTIVE;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles = new ArrayList<>();
 
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
